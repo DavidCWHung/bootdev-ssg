@@ -9,11 +9,11 @@ basepath = sys.argv[1] if len(sys.argv) > 1 else "/"
 
 dir_path_static = "./static"
 # dir_path_public = "./public"
-dir_path_doc = "./doc"
+dir_path_doc = "./docs"
 generate_page_from_path = "./content"
 generate_page_template_path = "./template.html"
 # generate_page_to_path = "./public"
-generate_page_to_path = "./doc"
+generate_page_to_path = "./docs"
 
 
 def delete_contents(directory):
