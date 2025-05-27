@@ -118,7 +118,7 @@ def generate_page(from_path, template_path, dest_path):
         f.write(new_html)
 
 
-def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+def generate_pages_recursive(basepath, dir_path_content, template_path, dest_dir_path):
     for entry in os.listdir(dir_path_content):
         src_path = os.path.join(dir_path_content, entry)
         dest_path = os.path.join(dest_dir_path, entry)
@@ -136,11 +136,11 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
 
             h1 = extract_title(read_data_src_path)
 
-            new_html_string = read_date_template_path.replace("{{ Title }}", h1).replace("{{ Content }}", md_html_node_string)
+            new_html_string = read_date_template_path.replace("{{ Title }}", h1).replace("{{ Content }}", md_html_node_string).replace('href="/', f'href="{basepath}').replace('src="/', f'src="{basepath}')
 
             with open(dest_path[:-2] + 'html', 'w') as f:
                 f.write(new_html_string)
         else:
             os.mkdir(dest_path)
             print(f"Creating directory {dest_path}")
-            generate_pages_recursive(src_path, template_path, dest_path)
+            generate_pages_recursive(basepath, src_path, template_path, dest_path)

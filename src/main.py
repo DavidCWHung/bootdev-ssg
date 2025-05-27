@@ -1,14 +1,19 @@
 import os
 import shutil
+import sys
 
 from textnode import TextNode, TextType
 from md_to_html_node import generate_pages_recursive
 
+basepath = sys.argv[1] if len(sys.argv) > 1 else "/"
+
 dir_path_static = "./static"
-dir_path_public = "./public"
+# dir_path_public = "./public"
+dir_path_doc = "./doc"
 generate_page_from_path = "./content"
 generate_page_template_path = "./template.html"
-generate_page_to_path = "./public"
+# generate_page_to_path = "./public"
+generate_page_to_path = "./doc"
 
 
 def delete_contents(directory):
@@ -48,10 +53,10 @@ def copy_contents(src, dst):
 
 
 def main():
-    delete_contents(dir_path_public)
-    copy_contents(dir_path_static, dir_path_public)
-    generate_pages_recursive(generate_page_from_path,
+    print("PATH: " + generate_page_from_path)
+
+    delete_contents(dir_path_doc)
+    copy_contents(dir_path_static, dir_path_doc)
+    generate_pages_recursive(basepath, generate_page_from_path,
                   generate_page_template_path, generate_page_to_path)
-
-
 main()
